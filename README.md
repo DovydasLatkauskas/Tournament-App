@@ -11,4 +11,4 @@ This project was started without using GitHub but was then uploaded and complete
 There are no third party libraries used in this project. In order to use the SQL database it has to be set up on the host computer. Otherwise one can use the text file based local database.
 
 
-This app is built with the help of the create a C# application course by Tim Corey
+This app is built following the create a C# application course by Tim Corey
