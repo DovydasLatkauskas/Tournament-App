@@ -85,7 +85,35 @@ namespace TrackerUI
                 }
             }
 
-            LoadMatchup(selectedMatchups.First());
+            if (selectedMatchups.Count > 0)
+            {
+                LoadMatchup(selectedMatchups.First()); 
+            }
+
+            DisplayMatchupInfo();
+
+        }
+
+        private void DisplayMatchupInfo()
+        {
+            if (selectedMatchups.Count > 0)
+            {
+                teamOneName.Visible = true;
+                teamOneScoreLabel.Visible = true;
+                teamOneScoreValue.Visible = true;
+                teamTwoName.Visible = true;
+                teamTwoScoreLabel.Visible = true;
+                teamTwoScoreValue.Visible = true;
+            }
+            else
+            {
+                teamOneName.Visible = false;
+                teamOneScoreLabel.Visible = false;
+                teamOneScoreValue.Visible = false;
+                teamTwoName.Visible = false;
+                teamTwoScoreLabel.Visible = false;
+                teamTwoScoreValue.Visible = false;
+            }
         }
 
         private void LoadMatchup(MatchupModel m)
@@ -143,6 +171,8 @@ namespace TrackerUI
         private void scoreButton_Click(object sender, EventArgs e)
         {
             MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
 
             int entriesCount = 0;
             if (m != null)
@@ -157,12 +187,11 @@ namespace TrackerUI
                     {
                         teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
 
-                        double scoreVal = 0;
-                        bool scoreValid = double.TryParse(teamOneScoreValue.Text, out scoreVal);
+                        bool scoreValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
 
                         if (scoreValid)
                         {
-                            m.Entries[0].Score = scoreVal; 
+                            m.Entries[0].Score = teamOneScore; 
                         }
                         else
                         {
@@ -176,12 +205,11 @@ namespace TrackerUI
                 {
                     if (m.Entries[1].TeamCompeting != null)
                     {
-                        double scoreVal = 0;
-                        bool scoreValid = double.TryParse(teamTwoScoreValue.Text, out scoreVal);
+                        bool scoreValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
 
                         if (scoreValid)
                         {
-                            m.Entries[1].Score = scoreVal;
+                            m.Entries[1].Score = teamTwoScore;
                         }
                         else
                         {
@@ -190,6 +218,19 @@ namespace TrackerUI
                         }
                     }
                 }
+            }
+
+            if (teamOneScore > teamTwoScore)
+            {
+                m.Winner = m.Entries[0].TeamCompeting;
+            }
+            else if (teamOneScore < teamTwoScore)
+            {
+                m.Winner = m.Entries[1].TeamCompeting;
+            }
+            else
+            {
+                MessageBox.Show("I do not handle tie games");
             }
         }
     }
