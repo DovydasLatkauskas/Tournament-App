@@ -104,6 +104,8 @@ namespace TrackerUI
                 teamTwoName.Visible = true;
                 teamTwoScoreLabel.Visible = true;
                 teamTwoScoreValue.Visible = true;
+                versusLabel.Visible = true;
+                scoreButton.Visible = true;
             }
             else
             {
@@ -113,6 +115,8 @@ namespace TrackerUI
                 teamTwoName.Visible = false;
                 teamTwoScoreLabel.Visible = false;
                 teamTwoScoreValue.Visible = false;
+                versusLabel.Visible = false;
+                scoreButton.Visible = false;
             }
         }
 
@@ -232,6 +236,10 @@ namespace TrackerUI
             {
                 MessageBox.Show("I do not handle tie games");
             }
+
+            LoadMatchups((int)roundDropDown.SelectedItem);
+
+
         }
     }
 }
