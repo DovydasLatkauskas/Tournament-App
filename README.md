@@ -8,7 +8,7 @@ Can use either a text file based database or a SQL database
 In the Program.cs file, 22nd line switch DatabaseType.Sql to DatabaseType.TextFile or vice versa
 
 # Configuring textfile database
-To configure the location of the database go to App.config and type in a new file location in <add key="filePath" value="C:\Temp\TournamentTracker\"/>
+To configure the location of the database go to App.config and type in a new file location in "add key="filePath""
 
 # Github
 This project was started without using GitHub but was then uploaded and completed with GitHub
